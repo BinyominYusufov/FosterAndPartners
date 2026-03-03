@@ -1,0 +1,168 @@
+{
+  "page": {
+    "title": "People",
+    "breadcrumbAll": "People / All",
+    "searchPlaceholder": "Search people...",
+    "allTitles": "All corporate titles",
+    "boards": "Boards",
+    "alphabetical": "По алфавиту",
+    "alphabeticalAsc": "Сортировка по алфавиту А–Я",
+    "alphabeticalDesc": "Сортировка по алфавиту Я–А",
+    "sortAsc": "↑",
+    "sortDesc": "↓",
+    "backToPeople": "Back to People",
+    "notFound": "Person not found.",
+    "noResults": "No results match your filters.",
+    "ariaTitle": "Должность",
+    "ariaBoard": "Совет",
+    "breadcrumbTeams": "People / Teams",
+    "searchTeamPlaceholder": "Search team...",
+    "backToTeams": "Back to Teams"
+  },
+  "teams": {
+    "architecture": "Архитектура",
+    "industrialDesign": "Промышленный дизайн",
+    "urbanDesignAndLandscape": "Градостроительство и ландшафт",
+    "architectureDesc": "Мы считаем, что лучшая архитектура рождается из синтеза всех элементов, из которых складывается здание.",
+    "industrialDesignDesc": "Команда промышленного дизайна ведёт разнообразные проекты и часто работает как неотъемлемая часть общего процесса проектирования.",
+    "urbanDesignDesc": "Проектирование в городском масштабе — сложная задача, будь то мастер-план нового района или обновление существующего.",
+    "engineering": "Инжиниринг",
+    "engineeringDesc": "Наша инженерная команда объединяет структуру, инженерные системы и оболочку для создания высокоэффективных зданий.",
+    "technology": "Технологии",
+    "technologyDesc": "Мы развиваем вычислительный дизайн, симуляции и цифровое производство в проектах по всему миру.",
+    "interiors": "Интерьеры",
+    "interiorsDesc": "Дизайн интерьеров и отделка для офисов, гостиниц и культурных проектов с акцентом на материалы и комфорт.",
+    "sustainability": "Устойчивое развитие",
+    "sustainabilityDesc": "Устойчивая и климато-ориентированная архитектура с пассивными и активными экологическими стратегиями.",
+    "urban": "Городское планирование",
+    "urbanDesc": "Градостроительное проектирование и мастер-планирование на уровне районов и городов.",
+    "workplace": "Рабочая среда",
+    "workplaceDesc": "Проектирование рабочих пространств с фокусом на гибкость, благополучие и лучшие практики.",
+    "masterPlanning": "Мастер-планирование",
+    "masterPlanningDesc": "Стратегическое мастер-планирование новых районов и обновление существующих городских территорий.",
+    "researchDevelopment": "Исследования и разработки",
+    "researchDevelopmentDesc": "Прикладные исследования в области вычислительного дизайна и эффективности зданий.",
+    "structural": "Конструкции",
+    "structuralDesc": "Конструктивный дизайн и интеграция инжиниринга и архитектуры для сложных геометрий.",
+    "transportInfrastructure": "Транспорт и инфраструктура",
+    "transportInfrastructureDesc": "Крупные аэропорты, вокзалы и транспортные узлы с акцентом на навигацию и опыт пассажиров.",
+    "visualisation": "Визуализация",
+    "visualisationDesc": "Представление проекта — от ручной графики до иммерсивных технологий.",
+    "residential": "Жильё",
+    "residentialDesc": "Жилые и смешанные проекты с фокусом на качество пространства и устойчивость.",
+    "cultural": "Культура",
+    "culturalDesc": "Музеи, галереи и общественные здания с акцентом на доступность и гибкость.",
+    "environmental": "Экология",
+    "environmentalDesc": "Экологическая стратегия, энергомоделирование и низкоуглеродный дизайн.",
+    "delivery": "Реализация",
+    "deliveryDesc": "Реализация проектов и строительная документация от детального проектирования до строительства.",
+    "digital": "Цифровые технологии",
+    "digitalDesc": "Цифровые инструменты, BIM и технические инновации в реализации проектов.",
+    "design": "Дизайн",
+    "designDesc": "Качество проектирования, совместные процессы и наставничество в практике."
+  },
+  "sections": {
+    "seniorPartners": "Senior Partners",
+    "partners": "Partners",
+    "associatePartners": "Associate Partners",
+    "associates": "Associates"
+  },
+  "titles": {
+    "Senior Partner": "Senior Partner",
+    "Partner": "Partner",
+    "Associate Partner": "Associate Partner",
+    "Associate": "Associate"
+  },
+  "boards": {
+    "Design": "Design",
+    "Engineering": "Engineering",
+    "Sustainability": "Sustainability",
+    "Leadership": "Leadership"
+  },
+  "cards": {
+    "all": "All",
+    "teams": "Teams"
+  },
+  "items": {
+    "person1": {
+      "name": "Seif Bahaa-El-Din",
+      "bio": "Seif Bahaa-El-Din is a Senior Partner at Foster + Partners with over twenty-five years of experience in the design and delivery of major international projects. He leads multidisciplinary teams across Europe, the Middle East and Asia, with a particular focus on high-rise and mixed-use developments. His work emphasises the integration of structure, services and envelope to achieve both environmental performance and architectural clarity. Before joining the practice he studied architecture and engineering in London and Zurich, and has lectured widely on tall buildings and sustainable design. Seif is a member of the Design Board and contributes to the practice’s research initiatives on low-carbon construction and circular economy principles."
+    },
+    "person2": {
+      "name": "Martha Tsigkari",
+      "bio": "Martha Tsigkari is a Senior Partner and leads the Applied Research and Development group at Foster + Partners. She is responsible for advancing computational design, simulation and digital fabrication across the practice’s projects worldwide. Her research has been applied to airports, stadia, masterplans and cultural buildings, improving both design outcomes and construction efficiency. Martha holds a PhD in architectural computation and has published and presented internationally on performance-driven design and machine learning in architecture. She sits on the Engineering Board and advises on technology strategy and innovation partnerships with universities and industry."
+    },
+    "person3": {
+      "name": "David Nelson",
+      "bio": "David Nelson is a Senior Partner and Head of Design at Foster + Partners, with a career spanning more than three decades at the practice. He has led many of the studio’s most significant projects, including headquarters buildings, cultural venues and urban masterplans. His design approach combines rigorous analysis of context and programme with a commitment to environmental and social sustainability. David has been instrumental in establishing design quality reviews and mentoring across the practice. He is a member of the Sustainability Board and has contributed to industry guidance on net-zero and resilient design."
+    },
+    "person4": {
+      "name": "Stefan Behling",
+      "bio": "Stefan Behling is a Senior Partner and leads the practice’s focus on sustainable and climate-responsive architecture. He has directed projects ranging from low-energy offices to large-scale infrastructure and has pioneered the use of passive and active environmental strategies in complex buildings. Stefan studied architecture and environmental design in Germany and the UK and has written and lectured extensively on building performance and renewable energy. He sits on the Leadership Board and is involved in the practice’s global sustainability initiatives and client advisory work."
+    },
+    "person5": {
+      "name": "Luke Fox",
+      "bio": "Luke Fox is a Senior Partner and Head of the London studio, with broad experience in the design and delivery of commercial, residential and cultural projects. He has led teams on award-winning buildings in the UK, Europe and the Middle East, with a strong emphasis on placemaking and user experience. Luke is actively involved in design review and talent development within the practice. He is a member of the Design Board and contributes to the studio’s approach to collaborative and inclusive design processes."
+    },
+    "person6": {
+      "name": "Katy Harris",
+      "bio": "Katy Harris is a Partner at Foster + Partners, specialising in transport and infrastructure projects. She has led the design of major airport terminals, stations and interchange buildings, with a focus on wayfinding, operational efficiency and passenger experience. Katy joined the practice after studying architecture and urban design and has worked across Asia, Europe and the Americas. She sits on the Engineering Board and supports the integration of structural and environmental engineering with architectural design."
+    },
+    "person7": {
+      "name": "Chris Connell",
+      "bio": "Chris Connell is a Partner with extensive experience in the design of workplaces, campuses and mixed-use developments. He has directed projects for technology, finance and institutional clients, with a particular interest in flexible layouts and wellbeing. Chris is involved in the practice’s research on post-pandemic workplace design and has presented at industry conferences. He contributes to the Sustainability Board and the development of environmental and wellness criteria for commercial projects."
+    },
+    "person8": {
+      "name": "Narinder Sagoo",
+      "bio": "Narinder Sagoo is a Partner and leads the practice’s visualisation and communication team. He has developed innovative approaches to design representation, from hand drawing to real-time and immersive technologies, supporting client and stakeholder engagement across projects. Narinder has taught and exhibited widely and is a strong advocate for the role of drawing in design thinking. He is a member of the Leadership Board and supports the practice’s external communications and brand development."
+    },
+    "person9": {
+      "name": "Angela Tinker",
+      "bio": "Angela Tinker is a Partner and specialist in interior design and fit-out for workplace, hospitality and cultural projects. She has led interior design for many of the practice’s flagship buildings, ensuring consistency between architecture and interior experience. Angela joined Foster + Partners after working in both the UK and the Middle East and has a particular interest in materials, lighting and user comfort. She contributes to the Design Board and the practice’s interior design standards and guidelines."
+    },
+    "person10": {
+      "name": "Toby Blunt",
+      "bio": "Toby Blunt is a Partner with a focus on structural design and the integration of engineering and architecture. He has worked on long-span structures, tall buildings and complex geometries, and is involved in the development of the practice’s in-house structural capabilities. Toby has a background in both architecture and engineering and has contributed to research on new materials and construction methods. He sits on the Engineering Board and supports technical innovation across projects."
+    },
+    "person11": {
+      "name": "Sara Kluck",
+      "bio": "Sara Kluck is an Associate Partner specialising in sustainable urban design and masterplanning. She has led multidisciplinary teams on large-scale urban projects in Europe, Asia and the Middle East, with an emphasis on climate adaptation, mobility and social infrastructure. Sara holds a master’s degree in urban design and has published on resilient cities and green infrastructure. She contributes to the Sustainability Board and the practice’s urban design and planning standards."
+    },
+    "person12": {
+      "name": "Jordan McRae",
+      "bio": "Jordan McRae is an Associate Partner with experience in the design and delivery of cultural and civic projects. He has worked on museums, galleries and public buildings, with a focus on accessibility, environmental control and long-term flexibility. Jordan is involved in the practice’s design review process and in mentoring junior staff. He contributes to the Leadership Board and supports the development of the practice’s cultural and public sector portfolio."
+    },
+    "person13": {
+      "name": "Emma Keyte",
+      "bio": "Emma Keyte is an Associate Partner and leads projects in the residential and mixed-use sectors. She has experience in high-rise and masterplan-scale housing, with a strong focus on quality of space, daylight and sustainability. Emma has worked across the UK, Europe and the Middle East and is involved in client and stakeholder liaison. She contributes to the Design Board and the practice’s residential design guidelines."
+    },
+    "person14": {
+      "name": "Ben Hydes",
+      "bio": "Ben Hydes is an Associate Partner with a background in environmental and building services engineering. He supports the integration of MEP and sustainability strategies across the practice’s projects and has led environmental assessments for major developments. Ben has contributed to industry guidance on energy modelling and low-carbon design. He sits on the Engineering Board and supports the practice’s net-zero and wellbeing objectives."
+    },
+    "person15": {
+      "name": "Louise Palomba",
+      "bio": "Louise Palomba is an Associate Partner specialising in project delivery and construction documentation. She has led teams through detailed design and construction phases on commercial and infrastructure projects in multiple regions. Louise is involved in quality assurance and the development of the practice’s BIM and delivery standards. She contributes to the Sustainability Board and the coordination of environmental and technical requirements on site."
+    },
+    "person16": {
+      "name": "James White",
+      "bio": "James White is an Associate with experience in architectural design and technical development across a range of building types. He has contributed to commercial, residential and cultural projects from concept through to construction, with a focus on facade and envelope design. James is involved in the practice’s graduate and internship programmes. He supports the Design Board and the dissemination of best practice across the studio."
+    },
+    "person17": {
+      "name": "Rebecca Hodge",
+      "bio": "Rebecca Hodge is an Associate specialising in interior design and space planning. She has worked on workplace, hospitality and residential interiors for projects in the UK and internationally. Rebecca is interested in the relationship between interior design and wellbeing and has contributed to the practice’s research on biophilic design and material health. She supports the Design Board and the interior design team’s development."
+    },
+    "person18": {
+      "name": "Oliver Salway",
+      "bio": "Oliver Salway is an Associate with a focus on structural engineering and computational design. He has worked on complex structures and has developed scripts and tools to support design and analysis. Oliver has a background in civil engineering and architecture and contributes to the practice’s research on optimisation and automation. He supports the Engineering Board and the integration of digital tools in project delivery."
+    },
+    "person19": {
+      "name": "Claire Johnson",
+      "bio": "Claire Johnson is an Associate specialising in sustainability assessment and environmental strategy. She supports project teams with energy modelling, life-cycle assessment and certification, and has worked on net-zero and low-carbon projects. Claire has a master’s degree in environmental design and contributes to the practice’s sustainability knowledge base. She supports the Sustainability Board and the development of environmental targets and reporting."
+    },
+    "person20": {
+      "name": "Daniel Lister",
+      "bio": "Daniel Lister is an Associate with experience in masterplanning and urban design. He has contributed to large-scale urban projects in Europe and the Middle East, with a focus on mobility, public space and resilience. Daniel is involved in the practice’s urban design group and in client and stakeholder workshops. He supports the Leadership Board and the practice’s approach to integrated urban and architectural design."
+    }
+  }
+}

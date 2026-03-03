@@ -1,0 +1,132 @@
+{
+  "page": {
+    "title": "Projects",
+    "searchPlaceholder": "Search projects...",
+    "allTypes": "All project types",
+    "allLocations": "All locations",
+    "date": "Date",
+    "alphabetical": "A–Z",
+    "count": "{{count}} Projects",
+    "countOne": "1 Project",
+    "noResults": "No projects match your filters.",
+    "about": "About this project",
+    "locationDetails": "Location & details",
+    "location": "Location",
+    "region": "Region",
+    "year": "Year",
+    "type": "Type",
+    "backToProjects": "Back to Projects",
+    "notFound": "Project not found."
+  },
+  "types": {
+    "Residential": "Residential",
+    "Commercial": "Commercial",
+    "Infrastructure": "Infrastructure",
+    "Masterplan": "Masterplan",
+    "Cultural": "Cultural"
+  },
+  "regions": {
+    "Europe": "Europe",
+    "middleEast": "Middle East",
+    "Asia": "Asia",
+    "northAmerica": "North America"
+  },
+  "items": {
+    "1": {
+      "title": "Bloomberg European Headquarters",
+      "description": "The Bloomberg European Headquarters in the City of London sets a new benchmark for sustainable office design. The building integrates innovative environmental systems and reconnects the historic Watling Street with the surrounding urban fabric."
+    },
+    "2": {
+      "title": "Apple Park",
+      "description": "Apple Park in Cupertino is a 175-acre campus centred on a ring-shaped main building. The design prioritises landscape, natural ventilation and renewable energy, creating a collaborative environment for over 12,000 employees."
+    },
+    "3": {
+      "title": "Millau Viaduct",
+      "description": "The Millau Viaduct spans the Tarn Valley in southern France and was at the time of completion the tallest bridge in the world. Its elegant structure responds to the dramatic landscape while improving connectivity between Paris and the Mediterranean."
+    },
+    "4": {
+      "title": "Hearst Tower",
+      "description": "Hearst Tower rises from the preserved 1928 Art Deco base of the original Hearst building in Midtown Manhattan. The diagrid structure reduces steel use and creates column-free interior spaces with abundant natural light."
+    },
+    "5": {
+      "title": "Masdar City",
+      "description": "Masdar City is a planned sustainable district in Abu Dhabi, designed to be one of the world's most sustainable urban communities. The masterplan combines traditional Arabic urban patterns with advanced renewable energy and low-carbon transport."
+    },
+    "6": {
+      "title": "The Gherkin",
+      "description": "30 St Mary Axe, known as the Gherkin, is a distinctive commercial tower in the City of London. Its aerodynamic form and double-skinned facade reduce wind loads and energy consumption while defining the London skyline."
+    },
+    "7": {
+      "title": "Clyde Auditorium",
+      "description": "The Clyde Auditorium on the banks of the River Clyde in Glasgow is a landmark concert and events venue. Its sculptural form and cladding respond to the industrial heritage and maritime character of the city."
+    },
+    "8": {
+      "title": "Marina Bay Sands",
+      "description": "Marina Bay Sands is an integrated resort on the Singapore waterfront. The rooftop SkyPark links three towers and offers panoramic views, reinforcing Singapore's identity as a global city."
+    },
+    "9": {
+      "title": "Reichstag Dome",
+      "description": "The restoration of the Reichstag and addition of a new glass dome in Berlin symbolises transparency and democracy. The dome allows public access and brings natural light into the parliament chamber below."
+    },
+    "10": {
+      "title": "Comcast Technology Center",
+      "description": "The Comcast Technology Center is the tallest building in Philadelphia. It houses offices, a hotel and public spaces, with a vertical garden and sky lobby that activate the tower and the city skyline."
+    },
+    "11": {
+      "title": "Lusail Stadium",
+      "description": "Lusail Stadium was the main venue for the FIFA World Cup 2022. The design draws on regional craft and light patterns, and the stadium is part of the broader development of Lusail City."
+    },
+    "12": {
+      "title": "Battersea Power Station",
+      "description": "The redevelopment of Battersea Power Station on the south bank of the Thames mixes residential, office and retail. The restored landmark and new buildings create a riverside quarter with strong connections to central London."
+    },
+    "13": {
+      "title": "Hong Kong International Airport",
+      "description": "Hong Kong International Airport at Chek Lap Kok was built on reclaimed land. The terminal's clear structure and natural lighting set a standard for airport design and wayfinding in Asia."
+    },
+    "14": {
+      "title": "Sainsbury Centre for Visual Arts",
+      "description": "The Sainsbury Centre at the University of East Anglia houses the Sainsbury collection of world art. The single-span, naturally lit space blurs the boundary between building and landscape."
+    },
+    "15": {
+      "title": "Masdar Institute",
+      "description": "The Masdar Institute of Science and Technology is a research campus within Masdar City. Traditional wind towers and narrow streets inform a low-energy, pedestrian-focused environment."
+    },
+    "16": {
+      "title": "Chesa Futura",
+      "description": "Chesa Futura is a residential building in St. Moritz with an organic, timber-clad form. It sits above the town and responds to the alpine context while providing views of the Engadin valley."
+    },
+    "17": {
+      "title": "Space House",
+      "description": "Space House in London is an early example of high-density urban housing with a clear structural and servicing strategy. The building contributes to the character of the South Bank area."
+    },
+    "18": {
+      "title": "Willis Faber and Dumas Headquarters",
+      "description": "The Willis Faber and Dumas building in Ipswich is a landmark of high-tech architecture. The curved glass curtain wall and open-plan floors create a flexible, daylit workplace."
+    },
+    "19": {
+      "title": "Beijing Capital International Airport",
+      "description": "Terminal 3 at Beijing Capital International Airport was one of the world's largest airport buildings at the time of opening. The dragon-like form and colour palette reference Chinese culture and create a clear identity."
+    },
+    "20": {
+      "title": "Zayed National Museum",
+      "description": "The Zayed National Museum on Saadiyat Island celebrates the history and values of the UAE. The design incorporates natural ventilation and light, with tower forms that evoke falcon wings."
+    },
+    "21": {
+      "title": "Riverside South Masterplan",
+      "description": "Riverside South extended the development of London's Docklands with a mixed-use masterplan. The scheme proposed new connections and a balance of uses along the Thames."
+    },
+    "22": {
+      "title": "Tower 2 of the World Trade Center",
+      "description": "200 Greenwich Street (Tower 2) is part of the World Trade Center redevelopment. The tower's tapered form and structural system respond to the site and the memory of the original complex."
+    },
+    "23": {
+      "title": "Songdo International Business District",
+      "description": "Songdo IBD is a new city district built on reclaimed land near Incheon. The masterplan integrates business, residential and cultural uses with a focus on sustainability and smart infrastructure."
+    },
+    "24": {
+      "title": "Museum of Fine Arts",
+      "description": "The Carré d'Art in Nîmes faces the Roman Maison Carrée and houses a museum of contemporary art and a municipal library. The transparent ground floor and classical proportions engage with the historic square."
+    }
+  }
+}

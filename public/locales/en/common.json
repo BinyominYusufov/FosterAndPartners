@@ -1,0 +1,98 @@
+{
+  "brand": "Foster + Partners",
+  "metadata": {
+    "title": "Foster + Partners",
+    "description": "Foster + Partners official website."
+  },
+  "header": {
+    "search": "Search",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "menu": {
+    "expertise": "Expertise",
+    "projects": "Projects",
+    "studio": "Studio",
+    "people": "People",
+    "news": "News",
+    "insights": "Insights",
+    "careers": "Careers",
+    "contact": "Contact"
+  },
+  "hero": {
+    "category": "News",
+    "title": "New community-driven residential towers open in Shenzhen"
+  },
+  "studio": {
+    "title": "Studio",
+    "aboutQuote": "We are a global studio for sustainable architecture, urbanism, engineering and design, founded by Norman Foster in 1967.",
+    "cards": {
+      "about": "About",
+      "life": "Life at Foster + Partners",
+      "vacancies": "Vacancies",
+      "edi": "Equity, Diversity and Inclusion",
+      "csr": "Corporate Social Responsibility",
+      "global": "Global Studios"
+    }
+  },
+  "expertise": {
+    "title": "Expertise",
+    "backToExpertise": "Back to Expertise",
+    "notFound": "Expertise not found.",
+    "sections": {
+      "design": "Design and Sustainability",
+      "engineering": "Engineering and Technology",
+      "spaces": "Spaces and Environments",
+      "consulting": "Consulting and Planning"
+    },
+    "cards": {
+      "engineering": "Engineering",
+      "technology": "Technology and Research",
+      "interiors": "Interiors",
+      "urban": "Urban and Landscape Design",
+      "architecture": "Architecture",
+      "workplace": "Workplace Consultancy",
+      "climate": "Climate and Sustainable Design",
+      "masterPlanning": "Master Planning"
+    },
+    "descriptions": {
+      "architectureDesc": "From the very beginning our practice was founded on a philosophy of innovation, sustainability and design. We continue to learn from the past and creatively embrace the challenges of the future, with a firm belief that good design makes a difference.",
+      "climateDesc": "Sustainability has been a central theme of our work for more than five decades. We work closely with our clients to develop bespoke design solutions that are optimised for their operations and the planet.",
+      "engineeringDesc": "Our integrated engineering teams deliver structural, mechanical, electrical and environmental solutions that push the boundaries of what is possible in building performance and efficiency.",
+      "technologyDesc": "We invest in research and development to pioneer new materials, construction methods and digital tools that shape the future of architecture and urban design.",
+      "interiorsDesc": "Our interior design practice creates spaces that enhance human experience, combining functionality with aesthetic excellence across workplaces, hospitality and cultural venues.",
+      "urbanDesc": "We design urban landscapes and master plans that respond to local context, climate and community needs, creating resilient and liveable cities for future generations.",
+      "workplaceDesc": "Our workplace consultancy helps organisations reimagine their environments to support collaboration, wellbeing and productivity in an evolving world of work.",
+      "masterPlanningDesc": "We develop comprehensive master plans that integrate architecture, infrastructure and landscape into cohesive, sustainable urban frameworks."
+    }
+  },
+  "news": {
+    "title": "News",
+    "latestNews": "Latest news",
+    "subscribeHeadline": "Stay up to date with the latest Foster + Partners projects and news.",
+    "emailPlaceholder": "Email address..",
+    "subscribe": "Subscribe"
+  },
+  "climate": {
+    "title": "Climate and Sustainable Design",
+    "quote": "Sustainability has been a central theme of our work for more than five decades. We work closely with our clients to develop bespoke design solutions that are optimised for their operations and the planet."
+  },
+  "careers": {
+    "title": "Careers",
+    "intro1": "Foster + Partners welcomes designers, innovators, makers and pioneering trailblazers to join the practice.",
+    "intro2": "We want to work with the best talent from across the industry and develop our people to grow within our practice. With people from diverse backgrounds, we nurture innovation and flexibility to deliver extraordinary projects.",
+    "vacancies": "Vacancies",
+    "life": "Life at Foster + Partners"
+  },
+  "architecture": {
+    "title": "Architecture",
+    "quote": "From the very beginning our practice was founded on a philosophy of innovation, sustainability and design. We continue to learn from the past and creatively embrace the challenges of the future, with a firm belief that good design makes a difference.",
+    "quoteAuthor": "Norman Foster"
+  },
+  "footer": {
+    "legal": "Legal and policies",
+    "rights": "All Rights Reserved.",
+    "backToTop": "Back To Top",
+    "brightness": "Brightness"
+  }
+}
