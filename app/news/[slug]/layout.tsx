@@ -14,11 +14,12 @@ const fallbackDescription = news.metadata?.description ?? '';
 
 type LayoutProps = {
   children: ReactNode;
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const article = NEWS_BY_SLUG.get(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const article = NEWS_BY_SLUG.get(slug);
 
   if (!article) {
     return {
