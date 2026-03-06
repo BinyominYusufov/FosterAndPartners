@@ -13,7 +13,7 @@ function normalizeLanguageCode(code: string): string {
   return 'en';
 }
 
-export function LanguageSelect() {
+export function LanguageSelect({ isDark = false }: { isDark?: boolean }) {
   const { i18n } = useTranslation();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -47,23 +47,25 @@ export function LanguageSelect() {
         aria-haspopup="listbox"
         onClick={() => setOpen((o) => !o)}
         className={cn(
-          'flex items-center gap-2 rounded-full border-2 border-neutral-400 bg-white px-3 py-2 text-sm font-medium text-black transition',
-          'hover:bg-neutral-100 hover:border-neutral-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 focus-visible:ring-offset-2'
+          'flex items-center gap-1.5 rounded-full px-2 py-1.5 text-xs font-normal transition-opacity hover:opacity-80',
+          isDark
+            ? 'text-white/90 hover:text-white'
+            : 'text-neutral-500 hover:text-neutral-700'
         )}
       >
-        <span className="relative flex h-5 w-7 shrink-0 overflow-hidden rounded-sm border border-neutral-200 bg-neutral-100">
+        <span className="relative flex h-4 w-5 shrink-0 overflow-hidden rounded-[3px]">
           <Image
             src={getFlagPath(current.flagCountry)}
             alt=""
             fill
             className="object-cover"
-            sizes="28px"
+            sizes="20px"
             unoptimized
           />
         </span>
-        <span className="min-w-[1.5rem] text-left">{current.short}</span>
+        <span className="min-w-[1.25rem]">{current.short}</span>
         <ChevronDown
-          className={cn('h-4 w-4 shrink-0 text-black transition-transform duration-200', open && 'rotate-180')}
+          className={cn('h-3.5 w-3.5 shrink-0 opacity-70 transition-transform duration-200', open && 'rotate-180')}
           aria-hidden
         />
       </button>
@@ -72,7 +74,7 @@ export function LanguageSelect() {
         role="listbox"
         aria-label="Language options"
         className={cn(
-          'absolute right-0 top-full z-[60] mt-2 min-w-[200px] rounded-lg border-2 border-neutral-300 bg-white py-2 shadow-xl transition-all duration-200',
+          'absolute right-0 top-full z-[60] mt-1.5 min-w-[160px] rounded-lg border border-neutral-100 bg-white/95 py-1 shadow-lg backdrop-blur-sm transition-all duration-200',
           open ? 'visible opacity-100' : 'invisible opacity-0 pointer-events-none'
         )}
       >
@@ -84,24 +86,22 @@ export function LanguageSelect() {
             aria-selected={currentCode === lang.code}
             onClick={() => handleSelect(lang.code)}
             className={cn(
-              'flex w-full cursor-pointer items-center gap-3 px-4 py-2.5 text-left text-sm font-medium text-black transition-colors',
-              'hover:bg-neutral-100',
-              currentCode === lang.code && 'bg-neutral-100'
+              'flex w-full cursor-pointer items-center gap-2.5 px-3 py-2 text-left text-xs transition-colors',
+              'hover:bg-neutral-50',
+              currentCode === lang.code ? 'bg-neutral-50 text-neutral-900' : 'text-neutral-600'
             )}
           >
-            <span className="relative flex h-5 w-7 shrink-0 overflow-hidden rounded-sm border border-neutral-200 bg-neutral-100">
+            <span className="relative flex h-4 w-5 shrink-0 overflow-hidden rounded-[3px]">
               <Image
                 src={getFlagPath(lang.flagCountry)}
                 alt=""
                 fill
                 className="object-cover"
-                sizes="28px"
+                sizes="20px"
                 unoptimized
               />
             </span>
-            <span>
-              {lang.label} ({lang.short})
-            </span>
+            <span>{lang.short}</span>
           </button>
         ))}
       </div>

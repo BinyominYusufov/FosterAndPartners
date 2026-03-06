@@ -6,9 +6,9 @@ export const languages = [
   { code: 'cn', label: 'Chinese', short: 'CN', flag: '🇨🇳', flagCountry: 'cn' },
 ] as const;
 
-/** Path to local flag image (in public/flags). Always use this so flags load without external CDN. */
+/** Real flag images from flagcdn.com (ISO 3166-1 alpha-2 country codes) */
 export function getFlagPath(countryCode: string): string {
-  return `/flags/${countryCode}.svg`;
+  return `https://flagcdn.com/32x24/${countryCode}.png`;
 }
 
 export type Language = (typeof languages)[number];

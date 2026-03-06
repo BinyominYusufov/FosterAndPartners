@@ -82,7 +82,7 @@ export function SiteHeader() {
           {t('brand')}
         </Link>
         <div className="flex items-center gap-4 md:gap-6">
-          <LanguageSelect />
+          <LanguageSelect isDark={isHome} />
           <Button variant="ghost" size="icon" aria-label={t('header.openMenu')} onClick={() => setMenuOpen(true)} className={isHome ? '' : 'text-black hover:bg-black/5'}>
             <Menu className="h-5 w-5" strokeWidth={1.5} />
           </Button>
