@@ -1,0 +1,35 @@
+{
+  "page": {
+    "title": "项目",
+    "searchPlaceholder": "搜索项目...",
+    "allTypes": "全部项目类型",
+    "allLocations": "全部地点",
+    "date": "日期",
+    "alphabetical": "A–Z",
+    "count": "{{count}} 个项目",
+    "countOne": "1 个项目",
+    "noResults": "没有匹配筛选条件的项目。",
+    "about": "关于此项目",
+    "locationDetails": "地点与详情",
+    "location": "地点",
+    "region": "地区",
+    "year": "年份",
+    "type": "类型",
+    "backToProjects": "返回项目",
+    "notFound": "未找到项目。"
+  },
+  "types": {
+    "Residential": "住宅",
+    "Commercial": "商业",
+    "Infrastructure": "基础设施",
+    "Masterplan": "总体规划",
+    "Cultural": "文化"
+  },
+  "regions": {
+    "Europe": "欧洲",
+    "middleEast": "中东",
+    "Asia": "亚洲",
+    "northAmerica": "北美"
+  },
+  "items": {}
+}

@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
@@ -13,6 +14,7 @@ const formFieldClass =
 
 export default function ContactPage() {
   const formRef = useRef<HTMLFormElement>(null);
+  const { t } = useTranslation();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -20,9 +22,9 @@ export default function ContactPage() {
   }
 
   return (
-    <main className="min-h-screen bg-white pt-[72px]">
+    <main className="min-h-screen bg-white pt-[77px]">
       {/* Hero */}
-      <section className="relative w-full aspect-[21/9]">
+      <section className="relative w-full aspect-[21/9.1]">
         <Image
           src={IMG_MISC.contactHero}
           alt=""
@@ -37,10 +39,10 @@ export default function ContactPage() {
         />
         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 lg:p-10">
           <h1 className="text-4xl font-light tracking-tight text-white md:text-5xl lg:text-6xl">
-            Contact
+            {t('contact.heroTitle')}
           </h1>
           <p className="mt-2 text-sm font-normal tracking-wide text-white/90 md:text-base">
-            Get in touch with our team
+            {t('contact.heroSubtitle')}
           </p>
         </div>
       </section>
@@ -56,32 +58,30 @@ export default function ContactPage() {
 
             <div className="space-y-4">
               <p className="text-xs uppercase tracking-[0.2em] text-neutral-400">
-                Head Office
+                {t('contact.officeLabel')}
               </p>
               <address className="not-italic">
                 <p className="text-base text-neutral-800">
-                  Riverside
+                  {t('contact.addressLine1')}
                   <br />
-                  22 Hester Road
+                  {t('contact.addressLine2')}
                   <br />
-                  London, SW11 4AN
-                  <br />
-                  United Kingdom
+                  {t('contact.addressLine3')}
                 </p>
                 <p className="mt-3 text-base text-neutral-800">
                   <a
-                    href="tel:+442077387999"
+                    href={`tel:${t('contact.phone')}`}
                     className="border-b border-transparent transition-colors hover:border-neutral-800 hover:underline"
                   >
-                    +44 20 7738 7999
+                    {t('contact.phone')}
                   </a>
                 </p>
                 <p className="mt-1 text-base text-neutral-800">
                   <a
-                    href="mailto:info@fosterandpartners.com"
+                    href={`mailto:${t('contact.email')}`}
                     className="border-b border-transparent transition-colors hover:border-neutral-800 hover:underline"
                   >
-                    info@fosterandpartners.com
+                    {t('contact.email')}
                   </a>
                 </p>
               </address>
@@ -89,28 +89,28 @@ export default function ContactPage() {
 
             <div className="space-y-4">
               <p className="text-xs uppercase tracking-[0.2em] text-neutral-400">
-                Careers Enquiries
+                {t('contact.careersLabel')}
               </p>
               <p className="text-base text-neutral-800">
                 <a
-                  href="mailto:careers@fosterandpartners.com"
+                  href={`mailto:${t('contact.careersEmail')}`}
                   className="border-b border-transparent transition-colors hover:border-neutral-800 hover:underline"
                 >
-                  careers@fosterandpartners.com
+                  {t('contact.careersEmail')}
                 </a>
               </p>
             </div>
 
             <div className="space-y-4">
               <p className="text-xs uppercase tracking-[0.2em] text-neutral-400">
-                Press Enquiries
+                {t('contact.pressLabel')}
               </p>
               <p className="text-base text-neutral-800">
                 <a
-                  href="mailto:press@fosterandpartners.com"
+                  href={`mailto:${t('contact.pressEmail')}`}
                   className="border-b border-transparent transition-colors hover:border-neutral-800 hover:underline"
                 >
-                  press@fosterandpartners.com
+                  {t('contact.pressEmail')}
                 </a>
               </p>
             </div>
@@ -119,7 +119,7 @@ export default function ContactPage() {
           {/* Right: Form */}
           <AnimatedSection>
             <h2 id="contact-form-heading" className="mb-8 text-xs uppercase tracking-[0.2em] text-neutral-400">
-              Send a message
+              {t('contact.formHeading')}
             </h2>
             <form
               ref={formRef}
@@ -130,13 +130,13 @@ export default function ContactPage() {
             >
               <div>
                 <label htmlFor="contact-name" className="sr-only">
-                  Full Name
+                  {t('contact.fullName')}
                 </label>
                 <Input
                   id="contact-name"
                   type="text"
                   name="name"
-                  placeholder="Full Name"
+                  placeholder={t('contact.fullName') || 'Full Name'}
                   required
                   className={formFieldClass}
                   autoComplete="name"
@@ -144,13 +144,13 @@ export default function ContactPage() {
               </div>
               <div>
                 <label htmlFor="contact-email" className="sr-only">
-                  Email
+                  {t('contact.emailLabel')}
                 </label>
                 <Input
                   id="contact-email"
                   type="email"
                   name="email"
-                  placeholder="Email"
+                  placeholder={t('contact.emailLabel') || 'Email'}
                   required
                   className={formFieldClass}
                   autoComplete="email"
@@ -158,25 +158,25 @@ export default function ContactPage() {
               </div>
               <div>
                 <label htmlFor="contact-subject" className="sr-only">
-                  Subject
+                  {t('contact.subject')}
                 </label>
                 <Input
                   id="contact-subject"
                   type="text"
                   name="subject"
-                  placeholder="Subject"
+                  placeholder={t('contact.subject') || 'Subject'}
                   className={formFieldClass}
                   autoComplete="off"
                 />
               </div>
               <div>
                 <label htmlFor="contact-message" className="sr-only">
-                  Message
+                  {t('contact.message')}
                 </label>
                 <Textarea
                   id="contact-message"
                   name="message"
-                  placeholder="Message"
+                  placeholder={t('contact.message') || 'Message'}
                   required
                   rows={5}
                   className={formFieldClass}
@@ -187,7 +187,7 @@ export default function ContactPage() {
                   type="submit"
                   className="rounded-md bg-black px-6 py-3 text-white hover:opacity-90 focus-visible:ring-0 focus-visible:ring-offset-0"
                 >
-                  Send
+                  {t('contact.send')}
                 </Button>
               </div>
             </form>
@@ -200,7 +200,7 @@ export default function ContactPage() {
         <div className="relative aspect-[21/9] w-full bg-neutral-200">
           <div className="absolute inset-0 flex items-center justify-center bg-neutral-100">
             <p className="text-sm text-neutral-400">
-              Map placeholder — embed or link to Google Maps here
+              {t('contact.mapPlaceholder')}
             </p>
           </div>
         </div>

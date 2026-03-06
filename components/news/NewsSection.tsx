@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { IMG_MISC } from '@/lib/images';
 
 export default function NewsSection() {
-  const { t } = useTranslation('translation');
+  const { t } = useTranslation();
 
   return (
     <section className="w-full bg-[#202020] px-6 py-16 md:px-8 lg:px-12">

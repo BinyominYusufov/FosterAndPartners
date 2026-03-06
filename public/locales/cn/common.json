@@ -1,0 +1,130 @@
+{
+  "brand": "Foster + Partners",
+  "metadata": {
+    "title": "Foster + Partners",
+    "description": "Foster + Partners 官方网站。"
+  },
+  "header": {
+    "search": "搜索",
+    "openMenu": "打开菜单",
+    "closeMenu": "关闭菜单"
+  },
+  "menu": {
+    "expertise": "专业",
+    "projects": "项目",
+    "studio": "工作室",
+    "people": "团队",
+    "news": "新闻",
+    "insights": "洞察",
+    "careers": "职业",
+    "contact": "联系"
+  },
+  "hero": {
+    "category": "新闻",
+    "title": "深圳新社区驱动住宅塔楼开放"
+  },
+  "studio": {
+    "title": "工作室",
+    "aboutQuote": "我们是一家致力于可持续建筑、城市规划、工程与设计的全球工作室，由诺曼·福斯特于1967年创立。",
+    "aboutText": "Foster + Partners 是一家致力于可持续建筑、城市规划、工程与设计的全球工作室，由诺曼·福斯特于1967年创立。我们在全球设有办公室，作为一个在民族和文化上多元化的单一实体运作，以人为本。",
+    "cards": {
+      "about": "关于",
+      "life": "Foster + Partners 的生活",
+      "vacancies": "职位空缺",
+      "edi": "公平、多元与包容",
+      "csr": "企业社会责任",
+      "global": "全球工作室"
+    },
+    "descriptions": {
+      "aboutDesc": "从最初开始，我们的实践就建立在创新、可持续与设计的理念之上。我们不断从过去学习，并创造性地迎接未来的挑战。",
+      "lifeDesc": "Foster + Partners 欢迎设计师、创新者与先锋加入。我们培育创新与灵活性，以交付卓越项目。",
+      "vacanciesDesc": "我们希望与行业顶尖人才合作，并帮助他们在实践中成长。",
+      "ediDesc": "我们致力于在整个实践中实现公平、多元与包容。",
+      "csrDesc": "我们的企业社会责任涵盖我们所服务的社区、我们塑造的环境以及我们为子孙后代留下的遗产。",
+      "globalDesc": "我们在全球设有工作室，在本地交付项目的同时，汲取全球专业知识。"
+    },
+    "backToStudio": "返回工作室",
+    "notFound": "未找到该页面。"
+  },
+  "expertise": {
+    "title": "专业",
+    "backToExpertise": "返回专业",
+    "notFound": "未找到相关专业。",
+    "sections": {
+      "design": "设计与可持续",
+      "engineering": "工程与技术",
+      "spaces": "空间与环境",
+      "consulting": "咨询与规划"
+    },
+    "cards": {
+      "engineering": "工程",
+      "technology": "技术与研究",
+      "interiors": "室内",
+      "urban": "城市与景观设计",
+      "architecture": "建筑",
+      "workplace": "工作场所咨询",
+      "climate": "气候与可持续设计",
+      "masterPlanning": "总体规划"
+    },
+    "descriptions": {
+      "architectureDesc": "从最初开始，我们的实践就建立在创新、可持续与设计的理念之上。我们不断从过去学习，并创造性地迎接未来的挑战，坚信优秀的设计能带来改变。",
+      "climateDesc": "可持续性是我们五十多年来工作的核心主题。我们与客户紧密合作，为其运营和地球开发定制设计解决方案。",
+      "engineeringDesc": "我们的综合工程团队提供结构、机电与环境解决方案，突破建筑性能与效率的边界。",
+      "technologyDesc": "我们投资研发，开拓新材料、施工方法与数字工具，塑造建筑与城市设计的未来。",
+      "interiorsDesc": "我们的室内设计实践创造提升人类体验的空间，在工作场所、酒店与文化场馆中结合功能与美学。",
+      "urbanDesc": "我们设计响应当地语境、气候与社区需求的城市景观与总体规划，为子孙后代创造韧性宜居城市。",
+      "workplaceDesc": "我们的工作场所咨询帮助组织重新构想环境，以支持协作、福祉与生产力。",
+      "masterPlanningDesc": "我们制定综合总体规划，将建筑、基础设施与景观整合为连贯、可持续的城市框架。"
+    }
+  },
+  "news": {
+    "title": "新闻",
+    "latestNews": "最新新闻",
+    "subscribeHeadline": "及时了解 Foster + Partners 项目与新闻。",
+    "emailPlaceholder": "电子邮箱...",
+    "subscribe": "订阅"
+  },
+  "climate": {
+    "title": "气候与可持续设计",
+    "quote": "可持续性是我们五十多年来工作的核心主题。我们与客户紧密合作，为其运营和地球开发定制设计解决方案。"
+  },
+  "careers": {
+    "title": "职业",
+    "intro1": "Foster + Partners 欢迎设计师、创新者、制造者与先锋加入我们的实践。",
+    "intro2": "我们希望与行业顶尖人才合作，并帮助他们在实践中成长。来自不同背景的我们，培育创新与灵活性，以交付卓越项目。",
+    "vacancies": "职位空缺",
+    "life": "Foster + Partners 的生活"
+  },
+  "contact": {
+    "heroTitle": "联系",
+    "heroSubtitle": "与我们的团队取得联系",
+    "officeLabel": "总部",
+    "addressLine1": "Ismoil Somoni dis",
+    "addressLine2": "L.Tolstoy str.",
+    "addressLine3": "Building 60 Apt 1",
+    "phone": "+99206666666",
+    "email": "kmehroj989@qq.com",
+    "careersLabel": "职业咨询",
+    "careersEmail": "careers@fosterandpartners.com",
+    "pressLabel": "媒体咨询",
+    "pressEmail": "press@fosterandpartners.com",
+    "formHeading": "发送消息",
+    "fullName": "姓名",
+    "emailLabel": "邮箱",
+    "subject": "主题",
+    "message": "消息",
+    "send": "发送",
+    "mapPlaceholder": "地图占位 — 在此嵌入或链接 Google 地图"
+  },
+  "architecture": {
+    "title": "建筑",
+    "quote": "从最初开始，我们的实践就建立在创新、可持续与设计的理念之上。我们不断从过去学习，并创造性地迎接未来的挑战，坚信优秀的设计能带来改变。",
+    "quoteAuthor": "诺曼·福斯特"
+  },
+  "footer": {
+    "legal": "法律与政策",
+    "rights": "版权所有。",
+    "backToTop": "返回顶部",
+    "brightness": "亮度"
+  }
+}

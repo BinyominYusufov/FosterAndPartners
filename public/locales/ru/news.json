@@ -1,5 +1,9 @@
 {
   "title": "Новости",
+  "latestNews": "Последние новости",
+  "subscribeHeadline": "Будьте в курсе последних проектов и новостей Foster + Partners.",
+  "emailPlaceholder": "Email адрес..",
+  "subscribe": "Подписаться",
   "subtitle": "",
   "searchPlaceholder": "Поиск новостей...",
   "filters": {

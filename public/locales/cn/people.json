@@ -1,0 +1,28 @@
+{
+  "page": {
+    "title": "团队",
+    "breadcrumbAll": "团队 / 全部",
+    "breadcrumbTeams": "团队 / 小组",
+    "searchPlaceholder": "搜索团队...",
+    "searchTeamPlaceholder": "搜索小组...",
+    "allTitles": "全部职位",
+    "boards": "董事会",
+    "alphabetical": "按字母",
+    "alphabeticalAsc": "按字母 A–Z",
+    "alphabeticalDesc": "按字母 Z–A",
+    "sortAsc": "↑",
+    "sortDesc": "↓",
+    "backToPeople": "返回团队",
+    "backToTeams": "返回小组",
+    "notFound": "未找到该成员。",
+    "noResults": "没有匹配筛选条件的结果。",
+    "ariaTitle": "职位",
+    "ariaBoard": "董事会"
+  },
+  "teams": {},
+  "sections": {},
+  "titles": {},
+  "boards": {},
+  "cards": { "all": "全部", "teams": "小组" },
+  "items": {}
+}

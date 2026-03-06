@@ -82,4 +82,8 @@ export const PUBLICATIONS: Publication[] = [
   { id: '4', titleKey: 'pub4Title', year: '2022', publisherKey: 'publisherTaschen', image: IMG_PROJECTS[3] },
   { id: '5', titleKey: 'pub5Title', year: '2021', publisherKey: 'publisherPhaidon', image: IMG_PROJECTS[4] },
   { id: '6', titleKey: 'pub6Title', year: '2020', publisherKey: 'publisherPhaidon', image: IMG_PROJECTS[5] },
+  { id: '7', titleKey: 'pub7Title', year: '2019', publisherKey: 'publisherTaschen', image: IMG_PROJECTS[6] },
+  { id: '8', titleKey: 'pub8Title', year: '2018', publisherKey: 'publisherDetail', image: IMG_PROJECTS[7] },
+  { id: '9', titleKey: 'pub9Title', year: '2017', publisherKey: 'publisherPhaidon', image: IMG_PROJECTS[8] },
+  { id: '10', titleKey: 'pub10Title', year: '2016', publisherKey: 'publisherTaschen', image: IMG_PROJECTS[9] },
 ];

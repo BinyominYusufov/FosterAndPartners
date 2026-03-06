@@ -8,24 +8,9 @@ import { Navigation, Autoplay } from 'swiper/modules';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
-import { IMG_EXPERTISE, IMG_MISC } from '@/lib/images';
+import { studioItems, type StudioItem } from '@/data/studioItems';
 import 'swiper/css';
 import 'swiper/css/navigation';
-
-export interface StudioItem {
-  titleKey: string;
-  href: string;
-  image: string;
-}
-
-const studioItems: StudioItem[] = [
-  { titleKey: 'about', href: '/about', image: IMG_EXPERTISE.studioAbout },
-  { titleKey: 'life', href: '/careers/life', image: IMG_EXPERTISE.lifeAtFoster },
-  { titleKey: 'vacancies', href: '/careers/vacancies', image: IMG_MISC.studioVacancies },
-  { titleKey: 'edi', href: '/edi', image: IMG_EXPERTISE.equityDiversity },
-  { titleKey: 'csr', href: '/csr', image: IMG_EXPERTISE.architecture },
-  { titleKey: 'global', href: '/global', image: IMG_EXPERTISE.globalStudio },
-];
 
 interface StudioCardProps {
   item: StudioItem;
@@ -37,7 +22,7 @@ interface StudioCardProps {
 function StudioCard({ item, title, gridClass, aspectClass = 'aspect-[25/9]' }: StudioCardProps) {
   return (
     <Link
-      href={item.href}
+      href={item.route}
       className={cn(
         'block overflow-hidden rounded-2xl group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-foreground',
         gridClass
@@ -115,7 +100,7 @@ export default function StudioSection() {
           className="!overflow-hidden"
         >
           {studioItems.map((item) => (
-            <SwiperSlide key={item.href}>
+            <SwiperSlide key={item.id}>
               <StudioCard
                 item={item}
                 title={t(`studio.cards.${item.titleKey}`)}
@@ -141,7 +126,7 @@ export default function StudioSection() {
         {/* Rest of cards */}
         {studioItems.slice(1).map((item, index) => (
           <StudioCard
-            key={item.href}
+            key={item.id}
             item={item}
             title={t(`studio.cards.${item.titleKey}`)}
             aspectClass={index === 4 ? 'aspect-[3/1]' : 'aspect-[3/2]'}

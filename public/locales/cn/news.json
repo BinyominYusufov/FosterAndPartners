@@ -1,0 +1,36 @@
+{
+  "title": "新闻",
+  "latestNews": "最新新闻",
+  "subscribeHeadline": "及时了解 Foster + Partners 项目与新闻。",
+  "emailPlaceholder": "电子邮箱...",
+  "subscribe": "订阅",
+  "subtitle": "",
+  "searchPlaceholder": "搜索新闻...",
+  "filters": { "all": "全部", "category": "分类", "date": "日期" },
+  "sort": { "latest": "最新", "alphabetical": "按字母" },
+  "pagination": { "loadMore": "加载更多" },
+  "card": { "readMore": "阅读文章" },
+  "emptyState": {
+    "title": "未找到文章",
+    "description": "没有匹配筛选条件的文章。"
+  },
+  "metadata": {
+    "title": "新闻 — Foster + Partners",
+    "description": "Foster + Partners 最新新闻与动态。"
+  },
+  "page": {
+    "title": "新闻",
+    "searchPlaceholder": "搜索新闻...",
+    "allTypes": "全部类型",
+    "date": "日期",
+    "count": "{{count}} 篇文章",
+    "countOne": "1 篇文章",
+    "noResults": "没有匹配筛选条件的文章。",
+    "readArticle": "阅读文章",
+    "readTime": "{{count}} 分钟阅读",
+    "backToNews": "返回新闻",
+    "notFound": "未找到文章。"
+  },
+  "types": {},
+  "items": {}
+}

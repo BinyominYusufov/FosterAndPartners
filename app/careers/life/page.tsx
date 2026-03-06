@@ -1,14 +1,27 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft } from 'lucide-react';
+import { IMG_EXPERTISE } from '@/lib/images';
 
 export default function CareersLifePage() {
   const { t } = useTranslation();
 
   return (
     <main className="min-h-screen bg-white pt-[72px]">
+      <div className="relative h-64 w-full overflow-hidden md:h-80">
+        <Image
+          src={IMG_EXPERTISE.lifeAtFoster}
+          alt={t('careers.life')}
+          fill
+          className="object-cover"
+          sizes="100vw"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/20" />
+      </div>
       <div className="mx-auto max-w-6xl px-5 py-10 md:px-6 md:py-14">
         <Link
           href="/careers"

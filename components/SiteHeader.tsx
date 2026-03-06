@@ -5,9 +5,9 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Menu, Search, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Button } from './ui/button';
-import { LanguageSwitcher } from './LanguageSwitcher';
+import { LanguageSelect } from './header/LanguageSelect';
 import menu1 from '@/public/1.png';
 import menu2 from '@/public/2.png';
 import menu3 from '@/public/3.png';
@@ -82,10 +82,7 @@ export function SiteHeader() {
           {t('brand')}
         </Link>
         <div className="flex items-center gap-4 md:gap-6">
-          <LanguageSwitcher />
-          <button type="button" aria-label={t('header.search')} className="opacity-80 hover:opacity-100">
-            <Search className="h-5 w-5" />
-          </button>
+          <LanguageSelect />
           <Button variant="ghost" size="icon" aria-label={t('header.openMenu')} onClick={() => setMenuOpen(true)} className={isHome ? '' : 'text-black hover:bg-black/5'}>
             <Menu className="h-5 w-5" strokeWidth={1.5} />
           </Button>

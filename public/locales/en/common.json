@@ -26,6 +26,7 @@
   "studio": {
     "title": "Studio",
     "aboutQuote": "We are a global studio for sustainable architecture, urbanism, engineering and design, founded by Norman Foster in 1967.",
+    "aboutText": "Foster + Partners is a global studio for sustainable architecture, urbanism, engineering and design, founded by Norman Foster in 1967. With offices across the world, the practice works as a single entity that is both ethnically and culturally diverse, with people central to all our endeavours.",
     "cards": {
       "about": "About",
       "life": "Life at Foster + Partners",
@@ -33,7 +34,17 @@
       "edi": "Equity, Diversity and Inclusion",
       "csr": "Corporate Social Responsibility",
       "global": "Global Studios"
-    }
+    },
+    "descriptions": {
+      "aboutDesc": "From the very beginning our practice was founded on a philosophy of innovation, sustainability and design. We continue to learn from the past and creatively embrace the challenges of the future, with a firm belief that good design makes a difference.",
+      "lifeDesc": "Foster + Partners welcomes designers, innovators, makers and pioneering trailblazers. We nurture innovation and flexibility to deliver extraordinary projects.",
+      "vacanciesDesc": "We want to work with the best talent from across the industry and develop our people to grow within our practice.",
+      "ediDesc": "We are committed to equity, diversity and inclusion across our practice. We believe that diverse perspectives strengthen our design and our culture.",
+      "csrDesc": "Our corporate social responsibility extends to the communities we work in, the environment we shape, and the legacy we leave for future generations.",
+      "globalDesc": "With studios around the world, we deliver projects locally while drawing on our global expertise and collaborative networks."
+    },
+    "backToStudio": "Back to Studio",
+    "notFound": "Studio page not found."
   },
   "expertise": {
     "title": "Expertise",
@@ -83,6 +94,27 @@
     "intro2": "We want to work with the best talent from across the industry and develop our people to grow within our practice. With people from diverse backgrounds, we nurture innovation and flexibility to deliver extraordinary projects.",
     "vacancies": "Vacancies",
     "life": "Life at Foster + Partners"
+  },
+  "contact": {
+    "heroTitle": "Contact",
+    "heroSubtitle": "Get in touch with our team",
+    "officeLabel": "Head Office",
+    "addressLine1": "Ismoil Somoni dis",
+    "addressLine2": "L.Tolstoy str.",
+    "addressLine3": "Building 60 Apt 1",
+    "phone": "+99206666666",
+    "email": "kmehroj989@qq.com",
+    "careersLabel": "Careers Enquiries",
+    "careersEmail": "careers@fosterandpartners.com",
+    "pressLabel": "Press Enquiries",
+    "pressEmail": "press@fosterandpartners.com",
+    "formHeading": "Send a message",
+    "fullName": "Full Name",
+    "emailLabel": "Email",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "Send",
+    "mapPlaceholder": "Map placeholder — embed or link to Google Maps here"
   },
   "architecture": {
     "title": "Architecture",

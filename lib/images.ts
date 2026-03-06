@@ -76,7 +76,7 @@ export const IMG_MISC = {
   heroMain2: `${base}/hero-main2.png`,
   heroMain3: `${base}/hero-main3.png`,
   studioVacancies: `${base}/studio-vacancies.png`,
-  contactHero: `${base}/hero-main.png`,
+  contactHero: `${base}/A.Mehroj.jpg`,
 } as const;
 
 // Careers (banner + 2 cards)
