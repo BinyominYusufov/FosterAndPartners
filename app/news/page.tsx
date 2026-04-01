@@ -1,47 +1,91 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import { Search, ArrowRight } from 'lucide-react';
-import { NEWS_ARTICLES, NEWS_TYPES, type NewsArticle, type NewsType } from '@/data/news';
+import { getNews } from '@/services/newsService';
+import type { NewsArticleList } from '@/lib/types/api';
 import { Input } from '@/components/ui/input';
-import { Select } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
-
-const TYPE_OPTIONS: (NewsType | 'All')[] = ['All', ...NEWS_TYPES];
 
 function formatDate(iso: string, locale: string): string {
   const d = new Date(iso);
-  return d.toLocaleDateString(locale === 'en' ? 'en-GB' : locale, { day: 'numeric', month: 'long', year: 'numeric' });
+  return d.toLocaleDateString(locale === 'en' ? 'en-GB' : locale, {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+}
+
+function readTime(article: NewsArticleList): number {
+  return article.read_time_minutes ?? article.readTimeMinutes ?? 0;
+}
+
+function articleTitle(article: NewsArticleList, t: (key: string) => string): string {
+  return article.title ?? (article.titleKey ? t(`items.${article.titleKey}`) : '');
+}
+
+function articleSummary(article: NewsArticleList, t: (key: string) => string): string {
+  return article.summary ?? (article.summaryKey ? t(`items.${article.summaryKey}`) : '');
 }
 
 export default function NewsPage() {
   const { t, i18n } = useTranslation('news');
   const [search, setSearch] = useState('');
-  const [selectedType, setSelectedType] = useState<string>('All');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
+  const [articles, setArticles] = useState<NewsArticleList[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
+    getNews({ page_size: 500 })
+      .then((res) => {
+        if (cancelled) return;
+        const rows = Array.isArray(res?.results) ? res.results : [];
+        setArticles(rows);
+      })
+      .catch((err) => {
+        if (!cancelled) setError(err?.message ?? 'Failed to load news');
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => { cancelled = true; };
+  }, []);
 
   const filtered = useMemo(() => {
-    let list = NEWS_ARTICLES;
+    let list = Array.isArray(articles) ? articles : [];
     if (search.trim()) {
       const q = search.trim().toLowerCase();
       list = list.filter(
         (a) =>
-          t(`items.${a.titleKey}`).toLowerCase().includes(q) ||
-          t(`items.${a.summaryKey}`).toLowerCase().includes(q)
+          articleTitle(a, t).toLowerCase().includes(q) ||
+          articleSummary(a, t).toLowerCase().includes(q)
       );
     }
-    if (selectedType !== 'All') {
-      list = list.filter((a) => a.type === selectedType);
-    }
     list = [...list].sort((a, b) => {
-      const cmp = a.date.localeCompare(b.date);
+      const aDate = a.published_at || a.date || '';
+      const bDate = b.published_at || b.date || '';
+      const cmp = aDate.localeCompare(bDate);
       return sortOrder === 'asc' ? cmp : -cmp;
     });
     return list;
-  }, [search, selectedType, sortOrder, t]);
+  }, [articles, search, sortOrder, t]);
+
+  if (error) {
+    return (
+      <main className="min-h-screen bg-white pt-[72px]">
+        <div className="mx-auto max-w-6xl px-5 py-10 md:px-6 md:py-14">
+          <p className="text-neutral-600">{error}</p>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-white pt-[72px]">
@@ -50,11 +94,13 @@ export default function NewsPage() {
           <h1 className="text-2xl font-normal tracking-tight text-neutral-900 md:text-3xl">
             {t('title')}
           </h1>
-          <p className="text-sm text-neutral-500">
-            {filtered.length === 1
-              ? t('page.countOne')
-              : t('page.count', { count: filtered.length })}
-          </p>
+          {!loading && (
+            <p className="text-sm text-neutral-500">
+              {filtered.length === 1
+                ? t('page.countOne')
+                : t('page.count', { count: filtered.length })}
+            </p>
+          )}
         </div>
 
         <div className="mb-10 rounded-2xl bg-[#f5f5f5] p-4 md:p-5">
@@ -70,19 +116,6 @@ export default function NewsPage() {
                 aria-label={t('searchPlaceholder')}
               />
             </div>
-            <Select
-              value={selectedType}
-              onChange={(e) => setSelectedType(e.target.value)}
-              aria-label={t('filters.all')}
-              className="w-full md:w-[200px]"
-            >
-              <option value="All">{t('filters.all')}</option>
-              {TYPE_OPTIONS.filter((v) => v !== 'All').map((type) => (
-                <option key={type} value={type}>
-                  {t(`types.${type}`)}
-                </option>
-              ))}
-            </Select>
             <Button
               type="button"
               variant="default"
@@ -95,29 +128,54 @@ export default function NewsPage() {
           </div>
         </div>
 
-        <ul className="space-y-8">
-          {filtered.map((article) => (
-            <NewsCard key={article.id} article={article} locale={i18n.language} />
-          ))}
-        </ul>
+        {loading ? (
+          <p className="py-12 text-center text-sm text-neutral-500">{t('page.loading', { defaultValue: 'Loading…' })}</p>
+        ) : (
+          <>
+            <ul className="space-y-8">
+              {filtered.map((article) => (
+                <NewsCard
+                  key={String(article.id)}
+                  article={article}
+                  locale={i18n.language}
+                  readTimeMin={readTime(article)}
+                  titleStr={articleTitle(article, t)}
+                  summaryStr={articleSummary(article, t)}
+                />
+              ))}
+            </ul>
 
-        {filtered.length === 0 && (
-          <div className="py-12 text-center">
-            <p className="text-sm font-medium text-neutral-700">{t('emptyState.title')}</p>
-            <p className="mt-1 text-sm text-neutral-500">{t('emptyState.description')}</p>
-          </div>
+            {filtered.length === 0 && (
+              <div className="py-12 text-center">
+                <p className="text-sm font-medium text-neutral-700">{t('emptyState.title')}</p>
+                <p className="mt-1 text-sm text-neutral-500">{t('emptyState.description')}</p>
+              </div>
+            )}
+          </>
         )}
       </div>
     </main>
   );
 }
 
-function NewsCard({ article, locale }: { article: NewsArticle; locale: string }) {
+function NewsCard({
+  article,
+  locale,
+  readTimeMin,
+  titleStr,
+  summaryStr,
+}: {
+  article: NewsArticleList;
+  locale: string;
+  readTimeMin: number;
+  titleStr: string;
+  summaryStr: string;
+}) {
   const { t } = useTranslation('news');
-  const title = t(`items.${article.titleKey}`);
-  const summary = t(`items.${article.summaryKey}`);
-  const dateStr = formatDate(article.date, locale);
-  const readTimeStr = t('page.readTime', { count: article.readTimeMinutes });
+  const rawDate = article.published_at || article.date;
+  const dateStr = rawDate ? formatDate(rawDate, locale) : '';
+  const readTimeStr = t('page.readTime', { count: readTimeMin });
+  const imageSrc = article.image || '/news1.jpg';
 
   return (
     <li>
@@ -127,23 +185,24 @@ function NewsCard({ article, locale }: { article: NewsArticle; locale: string })
       >
         <div className="relative h-56 w-full shrink-0 sm:h-52 sm:w-80">
           <Image
-            src={article.image}
-            alt={title}
+            src={imageSrc}
+            alt={titleStr}
             fill
             className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
             sizes="(max-width: 640px) 100vw, 320px"
+            unoptimized={imageSrc.startsWith('http')}
           />
         </div>
         <div className="flex flex-1 flex-col justify-between p-6">
           <div>
             <h2 className="text-lg font-medium text-neutral-900 group-hover:text-neutral-700 md:text-xl">
-              {title}
+              {titleStr}
             </h2>
             <p className="mt-1 text-sm text-neutral-500">
               {dateStr} – {readTimeStr}
             </p>
             <p className="mt-3 line-clamp-3 text-sm text-neutral-600">
-              {summary}
+              {summaryStr}
             </p>
           </div>
           <span className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-neutral-700 group-hover:text-neutral-900">

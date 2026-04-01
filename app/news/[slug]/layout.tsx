@@ -1,16 +1,6 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
-import newsEn from '../../../public/locales/en/news.json';
-import { NEWS_BY_SLUG } from '@/data/news';
-
-type NewsJson = {
-  metadata?: { title?: string; description?: string };
-  items?: Record<string, string>;
-};
-
-const news = newsEn as NewsJson;
-const fallbackTitle = news.metadata?.title ?? 'News — Foster + Partners';
-const fallbackDescription = news.metadata?.description ?? '';
+import { getNewsBySlugServer } from '@/services/newsService';
 
 type LayoutProps = {
   children: ReactNode;
@@ -19,17 +9,17 @@ type LayoutProps = {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const article = NEWS_BY_SLUG.get(slug);
+  const article = await getNewsBySlugServer(slug);
 
   if (!article) {
     return {
-      title: fallbackTitle,
-      description: fallbackDescription,
+      title: 'News — Foster + Partners',
+      description: '',
     };
   }
 
-  const title = news.items?.[article.titleKey] ?? fallbackTitle;
-  const description = news.items?.[article.summaryKey] ?? fallbackDescription;
+  const title = article.title ?? 'News — Foster + Partners';
+  const description = article.summary ?? article.summaryKey ?? '';
 
   return {
     title,
@@ -40,4 +30,3 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default function NewsArticleLayout({ children }: LayoutProps) {
   return children;
 }
-

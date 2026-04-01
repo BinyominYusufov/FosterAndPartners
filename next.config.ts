@@ -8,6 +8,15 @@ const nextConfig: NextConfig = {
         hostname: "flagcdn.com",
         pathname: "/**",
       },
+      ...(process.env.NODE_ENV === "development"
+        ? [
+            {
+              protocol: "http" as const,
+              hostname: "127.0.0.1",
+              pathname: "/**",
+            },
+          ]
+        : []),
     ],
   },
 };

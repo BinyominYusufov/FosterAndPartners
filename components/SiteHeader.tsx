@@ -20,7 +20,7 @@ import menu8 from '@/public/8.png';
 const menuItems: { key: string; image: import('next/image').StaticImageData; href: string }[] = [
   { key: 'expertise', image: menu1, href: '/expertise' },
   { key: 'projects', image: menu2, href: '/projects' },
-  { key: 'studio', image: menu3, href: '/' },
+  { key: 'studio', image: menu3, href: '/studio' },
   { key: 'people', image: menu4, href: '/people' },
   { key: 'news', image: menu5, href: '/news' },
   { key: 'insights', image: menu6, href: '/insights' },

@@ -4,28 +4,71 @@ import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
-import { projects } from '@/data/projects';
-import type { Project, ProjectRegion } from '@/data/projects';
 import { ArrowRight } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { getProjectById } from '@/services/projectService';
+import type { Project } from '@/lib/types/api';
 
-const REGION_I18N_KEYS: Record<ProjectRegion, string> = {
+const REGION_I18N_KEYS: Record<string, string> = {
   Europe: 'Europe',
   'Middle East': 'middleEast',
   Asia: 'Asia',
   'North America': 'northAmerica',
 };
 
-function getProjectById(id: string): Project | undefined {
-  return projects.find((p) => p.id === id);
+function projectTitle(project: Project, t: (key: string) => string): string {
+  return project.title ?? t(`projects.items.${project.id}.title`);
+}
+
+function projectDescription(project: Project, t: (key: string) => string): string {
+  return project.description ?? t(`projects.items.${project.id}.description`);
 }
 
 export default function ProjectInfoPage() {
   const { t } = useTranslation();
   const params = useParams();
   const id = typeof params.id === 'string' ? params.id : '';
-  const project = getProjectById(id);
+  const [project, setProject] = useState<Project | null>(null);
+  const [loading, setLoading] = useState(!!id);
+  const [error, setError] = useState<string | null>(null);
+  const [imageFailed, setImageFailed] = useState(false);
 
-  if (!project) {
+  useEffect(() => {
+    if (!id) {
+      setLoading(false);
+      return;
+    }
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
+    getProjectById(id)
+      .then((data) => {
+        if (!cancelled) setProject(data);
+      })
+      .catch(() => {
+        if (!cancelled) setError('Failed to load project');
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => { cancelled = true; };
+  }, [id]);
+
+  useEffect(() => {
+    setImageFailed(false);
+  }, [project?.image]);
+
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-white pt-[72px]">
+        <div className="mx-auto max-w-4xl px-5 py-14">
+          <p className="text-neutral-500">{t('projects.page.loading', { defaultValue: 'Loading…' })}</p>
+        </div>
+      </main>
+    );
+  }
+
+  if (error || !project) {
     return (
       <main className="min-h-screen bg-white pt-[72px]">
         <div className="mx-auto max-w-4xl px-5 py-14">
@@ -38,8 +81,10 @@ export default function ProjectInfoPage() {
     );
   }
 
-  const title = t(`projects.items.${project.id}.title`);
-  const description = t(`projects.items.${project.id}.description`);
+  const title = projectTitle(project, t);
+  const description = projectDescription(project, t);
+  const regionKey = REGION_I18N_KEYS[project.region] ?? project.region;
+  const imageSrc = project.image || '/p1.jpg';
 
   return (
     <main className="min-h-screen bg-white pt-[72px]">
@@ -53,26 +98,22 @@ export default function ProjectInfoPage() {
       </div>
 
       <div className="relative mt-4 aspect-[21/9] w-full overflow-hidden md:aspect-[3/1]">
-        <Image
-          src={project.image}
-          alt={title}
-          fill
-          className="object-cover object-center"
-          sizes="100vw"
-          priority
-          unoptimized
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            target.style.display = 'none';
-            const parent = target.parentElement;
-            if (parent) {
-              const fallback = document.createElement('div');
-              fallback.className = 'absolute inset-0 flex items-center justify-center bg-neutral-200 text-neutral-500';
-              fallback.textContent = title;
-              parent.appendChild(fallback);
-            }
-          }}
-        />
+        {!imageFailed ? (
+          <Image
+            src={imageSrc}
+            alt={title}
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+            priority
+            unoptimized={imageSrc.startsWith('http')}
+            onError={() => setImageFailed(true)}
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center bg-neutral-200 px-6 text-center text-neutral-500">
+            <span className="text-sm font-medium">{title}</span>
+          </div>
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 lg:p-10">
           <div className="mx-auto flex max-w-6xl flex-col justify-between gap-4 md:flex-row md:items-end">
@@ -107,7 +148,7 @@ export default function ProjectInfoPage() {
               </div>
               <div>
                 <dt className="text-neutral-500">{t('projects.page.region')}</dt>
-                <dd className="mt-0.5 font-medium text-neutral-900">{t(`projects.regions.${REGION_I18N_KEYS[project.region]}`)}</dd>
+                <dd className="mt-0.5 font-medium text-neutral-900">{t(`projects.regions.${regionKey}`)}</dd>
               </div>
               <div>
                 <dt className="text-neutral-500">{t('projects.page.year')}</dt>

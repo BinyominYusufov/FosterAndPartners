@@ -1,49 +1,102 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import { ArrowRight } from 'lucide-react';
-import { journalArticles, type PlusJournalArticle } from '@/data/journal';
+import { getPlusJournal } from '@/services/insightsService';
+import type { PlusJournalArticle } from '@/lib/types/api';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
 function formatDate(iso: string, locale: string): string {
   const d = new Date(iso);
-  return d.toLocaleDateString(
-    locale === 'en' ? 'en-GB' : locale,
-    { day: 'numeric', month: 'long', year: 'numeric' }
-  );
+  return d.toLocaleDateString(locale === 'en' ? 'en-GB' : locale, {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+}
+
+function readTime(article: PlusJournalArticle): number {
+  return article.read_time_minutes ?? article.readTimeMinutes ?? 0;
+}
+
+function articleTitle(article: PlusJournalArticle, t: (key: string) => string): string {
+  return article.title ?? (article.titleKey ? t(`items.${article.titleKey}`) : '');
+}
+
+function articleSummary(article: PlusJournalArticle, t: (key: string) => string): string {
+  return article.summary ?? (article.summaryKey ? t(`items.${article.summaryKey}`) : '');
+}
+
+function articleAuthors(article: PlusJournalArticle, t: (key: string) => string): string {
+  return article.authors ?? (article.authorsKey ? t(`authors.${article.authorsKey}`) : '');
 }
 
 export default function PlusJournalPage() {
   const { t, i18n } = useTranslation('insights');
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState<'date' | 'alphabetical'>('date');
+  const [articles, setArticles] = useState<PlusJournalArticle[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
+    getPlusJournal({ page_size: 500 })
+      .then((res) => {
+        if (!cancelled) {
+          const rows = Array.isArray(res?.results) ? res.results : [];
+          setArticles(rows);
+        }
+      })
+      .catch((err) => {
+        if (!cancelled) setError(err?.message ?? 'Failed to load articles');
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => { cancelled = true; };
+  }, []);
 
   const filtered = useMemo(() => {
-    let items = [...journalArticles];
+    let items = [...(Array.isArray(articles) ? articles : [])];
 
     if (search.trim()) {
       const q = search.trim().toLowerCase();
       items = items.filter((a) =>
-        t(`items.${a.titleKey}`).toLowerCase().includes(q)
+        articleTitle(a, t).toLowerCase().includes(q)
       );
     }
 
     items.sort((a, b) => {
       if (sort === 'date') {
-        return b.date.localeCompare(a.date);
+        const aDate = a.published_at || a.date || '';
+        const bDate = b.published_at || b.date || '';
+        return bDate.localeCompare(aDate);
       }
-      const ta = t(`items.${a.titleKey}`).toLowerCase();
-      const tb = t(`items.${b.titleKey}`).toLowerCase();
+      const ta = articleTitle(a, t).toLowerCase();
+      const tb = articleTitle(b, t).toLowerCase();
       return ta.localeCompare(tb);
     });
 
     return items;
-  }, [search, sort, t]);
+  }, [articles, search, sort, t]);
+
+  if (error) {
+    return (
+      <main className="min-h-screen bg-white pt-[72px]">
+        <section className="container mx-auto max-w-7xl px-6 py-12">
+          <p className="text-neutral-600">{error}</p>
+        </section>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-white pt-[72px]">
@@ -90,20 +143,30 @@ export default function PlusJournalPage() {
           </div>
         </div>
 
-        <div className="space-y-8">
-          {filtered.map((article) => (
-            <ArticleCard
-              key={article.id}
-              article={article}
-              locale={i18n.language}
-            />
-          ))}
-        </div>
+        {loading ? (
+          <p className="py-12 text-center text-sm text-neutral-500">{t('searchEmpty', { defaultValue: 'Loading…' })}</p>
+        ) : (
+          <>
+            <div className="space-y-8">
+              {filtered.map((article) => (
+                <ArticleCard
+                  key={String(article.id)}
+                  article={article}
+                  locale={i18n.language}
+                  titleStr={articleTitle(article, t)}
+                  summaryStr={articleSummary(article, t)}
+                  authorsStr={articleAuthors(article, t)}
+                  readTimeMin={readTime(article)}
+                />
+              ))}
+            </div>
 
-        {filtered.length === 0 && (
-          <div className="py-12 text-center text-sm text-neutral-500">
-            {t('searchEmpty', { defaultValue: 'No articles match your search.' })}
-          </div>
+            {filtered.length === 0 && (
+              <div className="py-12 text-center text-sm text-neutral-500">
+                {t('searchEmpty', { defaultValue: 'No articles match your search.' })}
+              </div>
+            )}
+          </>
         )}
       </section>
     </main>
@@ -113,16 +176,23 @@ export default function PlusJournalPage() {
 function ArticleCard({
   article,
   locale,
+  titleStr,
+  summaryStr,
+  authorsStr,
+  readTimeMin,
 }: {
   article: PlusJournalArticle;
   locale: string;
+  titleStr: string;
+  summaryStr: string;
+  authorsStr: string;
+  readTimeMin: number;
 }) {
   const { t } = useTranslation('insights');
-  const title = t(`items.${article.titleKey}`);
-  const summary = t(`items.${article.summaryKey}`, { defaultValue: '' });
-  const author = t(`authors.${article.authorsKey}`);
-  const dateStr = formatDate(article.date, locale);
-  const readTime = t('article.readTime', { count: article.readTimeMinutes });
+  const rawDate = article.published_at || article.date;
+  const dateStr = rawDate ? formatDate(rawDate, locale) : '';
+  const readTime = t('article.readTime', { count: readTimeMin });
+  const imageSrc = article.image || '/news1.jpg';
 
   return (
     <Link
@@ -131,11 +201,12 @@ function ArticleCard({
     >
       <div className="relative h-56 w-full shrink-0 md:h-56 md:w-80">
         <Image
-          src={article.image}
-          alt={title}
+          src={imageSrc}
+          alt={titleStr}
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
           sizes="(max-width: 768px) 100vw, 320px"
+          unoptimized={imageSrc.startsWith('http')}
         />
       </div>
       <div className="flex flex-1 flex-col justify-between p-6">
@@ -144,17 +215,17 @@ function ArticleCard({
             {t('plusJournal')}
           </Badge>
           <h2 className="text-lg font-semibold text-neutral-900 md:text-xl">
-            {title}
+            {titleStr}
           </h2>
           <p className="mt-1 text-sm text-neutral-500">
             {dateStr} • {readTime}
           </p>
           <p className="mt-1 text-sm text-neutral-500">
-            {t('article.byAuthor', { author })}
+            {t('article.byAuthor', { author: authorsStr })}
           </p>
-          {summary && (
+          {summaryStr && (
             <p className="mt-3 line-clamp-3 text-sm text-neutral-600">
-              {summary}
+              {summaryStr}
             </p>
           )}
         </div>
@@ -172,4 +243,3 @@ function ArticleCard({
     </Link>
   );
 }
-

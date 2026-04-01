@@ -1,11 +1,30 @@
 'use client';
 
 import Image from 'next/image';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IMG_MISC } from '@/lib/images';
+import { subscribeNewsletter } from '@/services/newsletterService';
 
 export default function NewsSection() {
   const { t } = useTranslation();
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const value = email.trim();
+    if (!value) return;
+
+    setStatus('loading');
+    try {
+      await subscribeNewsletter({ email: value });
+      setStatus('success');
+      setEmail('');
+    } catch {
+      setStatus('error');
+    }
+  }
 
   return (
     <section className="w-full bg-[#202020] px-6 py-16 md:px-8 lg:px-12">
@@ -13,7 +32,6 @@ export default function NewsSection() {
         {t('news.title')}
       </h2>
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
-        {/* Left: Latest news image card */}
         <div className="relative overflow-hidden rounded-2xl lg:col-span-2 aspect-[25/9]">
           <Image
             src={IMG_MISC.latestNews}
@@ -32,23 +50,33 @@ export default function NewsSection() {
             </h3>
           </div>
         </div>
-        {/* Right: Subscription form */}
         <div className="flex flex-col justify-center rounded-2xl bg-[#2C2C2C] p-6 lg:p-8">
           <p className="mb-6 text-base leading-relaxed text-white md:text-lg">
             {t('news.subscribeHeadline')}
           </p>
-          <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
+          <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
             <input
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder={t('news.emailPlaceholder')}
               className="w-full rounded-full border-0 bg-[#1a1a1a] px-6 py-4 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/30"
               aria-label={t('news.emailPlaceholder')}
+              required
+              disabled={status === 'loading'}
             />
             <button
               type="submit"
-              className="w-full rounded-full bg-[#1a1a1a] px-6 py-4 font-medium text-white transition-colors hover:bg-[#252525] focus:outline-none focus:ring-2 focus:ring-white/30"
+              disabled={status === 'loading'}
+              className="w-full rounded-full bg-[#1a1a1a] px-6 py-4 font-medium text-white transition-colors hover:bg-[#252525] focus:outline-none focus:ring-2 focus:ring-white/30 disabled:opacity-70"
             >
-              {t('news.subscribe')}
+              {status === 'loading'
+                ? t('news.sending', { defaultValue: 'Sending…' })
+                : status === 'success'
+                  ? t('news.subscribed', { defaultValue: 'Subscribed!' })
+                  : status === 'error'
+                    ? t('news.error', { defaultValue: 'Try again' })
+                    : t('news.subscribe')}
             </button>
           </form>
         </div>

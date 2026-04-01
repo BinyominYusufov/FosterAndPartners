@@ -4,10 +4,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { INSIGHTS_CARDS } from '@/data/insights';
 import { IMG_INSIGHTS, IMG_MISC, IMG_NEWS, IMG_PROJECTS } from '@/lib/images';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+
+const INSIGHTS_CARDS = [
+  { key: 'plusJournal', titleKey: 'plusJournal', descriptionKey: 'plusJournalDesc', href: '/insights/plus-journal', image: IMG_INSIGHTS.plusJournal },
+  { key: 'publications', titleKey: 'publications', descriptionKey: 'publicationsDesc', href: '/insights/publications', image: IMG_INSIGHTS.publications },
+] as const;
 
 const HERO_CANDIDATES: string[] = [
   IMG_INSIGHTS.banner,
@@ -83,4 +87,3 @@ export default function InsightsPage() {
     </main>
   );
 }
-

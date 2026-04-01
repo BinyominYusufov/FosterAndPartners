@@ -5,16 +5,59 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft } from 'lucide-react';
-import { TEAMS_BY_SLUG } from '@/data/teams';
+import { useEffect, useState } from 'react';
+import { getTeamBySlug } from '@/services/teamsService';
+import type { Team } from '@/lib/types/api';
 import { AnimatedSection } from '@/components/AnimatedSection';
+
+function teamTitle(team: Team, t: (key: string) => string): string {
+  return team.title ?? (team.titleKey ? t(`people.teams.${team.titleKey}`) : '');
+}
+
+function teamDescription(team: Team, t: (key: string) => string): string {
+  return team.description ?? (team.descriptionKey ? t(`people.teams.${team.descriptionKey}`) : '');
+}
 
 export default function TeamDetailPage() {
   const { t } = useTranslation();
   const params = useParams();
   const slug = typeof params.slug === 'string' ? params.slug : '';
-  const team = slug ? TEAMS_BY_SLUG.get(slug) : undefined;
+  const [team, setTeam] = useState<Team | null>(null);
+  const [loading, setLoading] = useState(!!slug);
+  const [error, setError] = useState<string | null>(null);
 
-  if (!team) {
+  useEffect(() => {
+    if (!slug) {
+      setLoading(false);
+      return;
+    }
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
+    getTeamBySlug(slug)
+      .then((data) => {
+        if (!cancelled) setTeam(data);
+      })
+      .catch(() => {
+        if (!cancelled) setError('Failed to load team');
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => { cancelled = true; };
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-white pt-[72px]">
+        <div className="mx-auto max-w-4xl px-5 py-14">
+          <p className="text-neutral-500">{t('people.page.loading', { defaultValue: 'Loading…' })}</p>
+        </div>
+      </main>
+    );
+  }
+
+  if (error || !team) {
     return (
       <main className="min-h-screen bg-white pt-[72px]">
         <div className="mx-auto max-w-4xl px-5 py-14">
@@ -27,8 +70,9 @@ export default function TeamDetailPage() {
     );
   }
 
-  const title = t(`people.teams.${team.titleKey}`);
-  const description = t(`people.teams.${team.descriptionKey}`);
+  const title = teamTitle(team, t);
+  const description = teamDescription(team, t);
+  const imageSrc = team.image || '/expertise-interior.png';
 
   return (
     <main className="min-h-screen bg-white pt-[72px]">
@@ -51,11 +95,12 @@ export default function TeamDetailPage() {
         <AnimatedSection className="mt-10">
           <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-neutral-200">
             <Image
-              src={team.image}
+              src={imageSrc}
               alt={title}
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 896px"
+              unoptimized={imageSrc.startsWith('http')}
             />
           </div>
         </AnimatedSection>
@@ -63,7 +108,7 @@ export default function TeamDetailPage() {
         <AnimatedSection className="mt-10">
           <Link
             href="/people/teams"
-            className="inline-flex items-center gap-2 text-sm text-neutral-600 transition-colors hover:text-neutral-900"
+            className="inline-flex items-center gap-2 text-sm text-neutral-600 hover:text-neutral-900"
           >
             <ArrowLeft className="h-4 w-4" />
             {t('people.page.backToTeams')}

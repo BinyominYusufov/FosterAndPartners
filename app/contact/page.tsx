@@ -1,12 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { AnimatedSection } from '@/components/AnimatedSection';
+import { submitContactMessage } from '@/services/contactService';
 import { IMG_MISC } from '@/lib/images';
 
 const formFieldClass =
@@ -15,15 +16,41 @@ const formFieldClass =
 export default function ContactPage() {
   const formRef = useRef<HTMLFormElement>(null);
   const { t } = useTranslation();
+  const [submitting, setSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorDetail, setErrorDetail] = useState<string | null>(null);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // Form submission can be wired to an API or action
+    const form = formRef.current;
+    if (!form || submitting) return;
+
+    const payload = {
+      name: (form.querySelector('[name="name"]') as HTMLInputElement)?.value?.trim(),
+      email: (form.querySelector('[name="email"]') as HTMLInputElement)?.value?.trim() ?? '',
+      subject: (form.querySelector('[name="subject"]') as HTMLInputElement)?.value?.trim(),
+      message: (form.querySelector('[name="message"]') as HTMLTextAreaElement)?.value?.trim(),
+    };
+
+    if (!payload.email) return;
+
+    setSubmitting(true);
+    setSubmitStatus('idle');
+    setErrorDetail(null);
+    try {
+      await submitContactMessage(payload);
+      setSubmitStatus('success');
+      form.reset();
+    } catch (err) {
+      setSubmitStatus('error');
+      setErrorDetail(err instanceof Error ? err.message : null);
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
     <main className="min-h-screen bg-white pt-[77px]">
-      {/* Hero */}
       <section className="relative w-full aspect-[21/9.1]">
         <Image
           src={IMG_MISC.contactHero}
@@ -47,10 +74,8 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Main content */}
       <section className="mx-auto max-w-6xl px-5 py-24 md:px-6">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-20">
-          {/* Left: Contact information */}
           <AnimatedSection className="space-y-12">
             <div>
               <h2 className="sr-only">Contact information</h2>
@@ -116,7 +141,6 @@ export default function ContactPage() {
             </div>
           </AnimatedSection>
 
-          {/* Right: Form */}
           <AnimatedSection>
             <h2 id="contact-form-heading" className="mb-8 text-xs uppercase tracking-[0.2em] text-neutral-400">
               {t('contact.formHeading')}
@@ -128,6 +152,16 @@ export default function ContactPage() {
               aria-labelledby="contact-form-heading"
               noValidate
             >
+              {submitStatus === 'success' && (
+                <p className="rounded-md bg-green-50 px-4 py-2 text-sm text-green-800">
+                  {t('contact.success', { defaultValue: 'Message sent successfully.' })}
+                </p>
+              )}
+              {submitStatus === 'error' && (
+                <p className="rounded-md bg-red-50 px-4 py-2 text-sm text-red-800">
+                  {errorDetail ?? t('contact.error', { defaultValue: 'Failed to send. Please try again.' })}
+                </p>
+              )}
               <div>
                 <label htmlFor="contact-name" className="sr-only">
                   {t('contact.fullName')}
@@ -185,9 +219,10 @@ export default function ContactPage() {
               <div>
                 <Button
                   type="submit"
-                  className="rounded-md bg-black px-6 py-3 text-white hover:opacity-90 focus-visible:ring-0 focus-visible:ring-offset-0"
+                  disabled={submitting}
+                  className="rounded-md bg-black px-6 py-3 text-white hover:opacity-90 focus-visible:ring-0 focus-visible:ring-offset-0 disabled:opacity-70"
                 >
-                  {t('contact.send')}
+                  {submitting ? t('contact.sending', { defaultValue: 'Sending…' }) : t('contact.send')}
                 </Button>
               </div>
             </form>
@@ -195,7 +230,6 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Map placeholder */}
       <section className="mt-24 w-full" aria-label="Office location">
         <div className="relative aspect-[21/9] w-full bg-neutral-200">
           <div className="absolute inset-0 flex items-center justify-center bg-neutral-100">

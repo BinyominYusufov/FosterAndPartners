@@ -8,21 +8,34 @@ import { Navigation, Autoplay } from 'swiper/modules';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
-import { studioItems, type StudioItem } from '@/data/studioItems';
+import { useEffect, useState } from 'react';
+import { getStudioTopics } from '@/services/studioTopicsService';
+import type { StudioTopicList } from '@/lib/types/api';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
+function topicTitle(topic: StudioTopicList): string {
+  return topic.title;
+}
+
+function topicHref(topic: StudioTopicList): string {
+  return `/studio/${topic.slug}`;
+}
+
 interface StudioCardProps {
-  item: StudioItem;
+  item: StudioTopicList;
   title: string;
   gridClass?: string;
   aspectClass?: string;
 }
 
 function StudioCard({ item, title, gridClass, aspectClass = 'aspect-[25/9]' }: StudioCardProps) {
+  const href = topicHref(item);
+  const imageSrc = item.image ?? '/studio-about.png';
+
   return (
     <Link
-      href={item.route}
+      href={href}
       className={cn(
         'block overflow-hidden rounded-2xl group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-foreground',
         gridClass
@@ -37,11 +50,12 @@ function StudioCard({ item, title, gridClass, aspectClass = 'aspect-[25/9]' }: S
       >
         <div className="absolute inset-0 overflow-hidden rounded-2xl">
           <Image
-            src={item.image}
+            src={imageSrc}
             alt={title}
             fill
             className="object-cover transition-transform duration-300 ease-out group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            unoptimized={imageSrc.startsWith('http')}
           />
         </div>
         <div className="absolute bottom-0 left-0 right-0 p-6">
@@ -49,22 +63,39 @@ function StudioCard({ item, title, gridClass, aspectClass = 'aspect-[25/9]' }: S
             {title}
           </h3>
         </div>
-      </Card> 
+      </Card>
     </Link>
   );
 }
 
 export default function StudioSection() {
   const { t } = useTranslation();
+  const [studioItems, setStudioItems] = useState<StudioTopicList[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    getStudioTopics({ page_size: 20 })
+      .then((res) => {
+        if (!cancelled) setStudioItems(res.results ?? []);
+      })
+      .catch(() => {})
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => { cancelled = true; };
+  }, []);
+
+  if (loading || studioItems.length === 0) {
+    return null;
+  }
 
   return (
     <section className="w-full overflow-x-hidden bg-[#0f0f0f] px-6 py-16 md:px-8 lg:px-12">
-      {/* Mobile: header with title + nav arrows */}
       <div className="mb-6 flex items-center justify-between lg:mb-12">
         <h2 className="text-4xl font-medium text-white tracking-tight md:text-5xl">
           {t('studio.title')}
         </h2>
-        {/* Mobile swiper nav - dark circular buttons */}
         <div className="flex gap-2 md:hidden">
           <button
             type="button"
@@ -83,7 +114,6 @@ export default function StudioSection() {
         </div>
       </div>
 
-      {/* Mobile: Swiper */}
       <div className="overflow-hidden md:hidden">
         <Swiper
           modules={[Navigation, Autoplay]}
@@ -92,7 +122,7 @@ export default function StudioSection() {
             nextEl: '.studio-swiper-next',
           }}
           autoplay={{ delay: 4000, disableOnInteraction: false }}
-          loop={true}
+          loop={studioItems.length > 1}
           loopAdditionalSlides={2}
           allowTouchMove={false}
           spaceBetween={16}
@@ -100,10 +130,10 @@ export default function StudioSection() {
           className="!overflow-hidden"
         >
           {studioItems.map((item) => (
-            <SwiperSlide key={item.id}>
+            <SwiperSlide key={String(item.id)}>
               <StudioCard
                 item={item}
-                title={t(`studio.cards.${item.titleKey}`)}
+                title={topicTitle(item)}
                 aspectClass="aspect-[3/2]"
               />
             </SwiperSlide>
@@ -111,24 +141,23 @@ export default function StudioSection() {
         </Swiper>
       </div>
 
-      {/* Desktop: Grid - About (wide) + Quote, then rest of cards */}
       <div className="hidden overflow-hidden grid-cols-1 gap-6 gap-y-10 md:grid md:grid-cols-2 md:gap-y-12 lg:grid lg:grid-cols-3 lg:gap-8 lg:gap-y-12">
-        {/* Row 1: About (wide left) + Quote (narrow right) */}
-        <div className="lg:col-span-2">
-          <StudioCard item={studioItems[0]} title={t(`studio.cards.about`)} aspectClass="aspect-[25/9]" />
-        </div>
+        {studioItems[0] && (
+          <div className="lg:col-span-2">
+            <StudioCard item={studioItems[0]} title={topicTitle(studioItems[0])} aspectClass="aspect-[25/9]" />
+          </div>
+        )}
         <div className="flex h-full min-h-[140px] flex-col items-center justify-center rounded-2xl bg-[#1a1a1a] p-6 text-center">
           <p className="text-base leading-relaxed text-white/90 md:text-lg">
             {t('studio.aboutQuote')}
           </p>
           <p className="mt-4 text-sm text-white/70">{t('brand')}</p>
         </div>
-        {/* Rest of cards */}
         {studioItems.slice(1).map((item, index) => (
           <StudioCard
-            key={item.id}
+            key={String(item.id)}
             item={item}
-            title={t(`studio.cards.${item.titleKey}`)}
+            title={topicTitle(item)}
             aspectClass={index === 4 ? 'aspect-[3/1]' : 'aspect-[3/2]'}
             gridClass={
               index === 0
